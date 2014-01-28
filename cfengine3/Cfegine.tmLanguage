@@ -125,6 +125,33 @@
                 <string>meta.promise.cfengine</string>
             </dict>
 
+            <dict>
+                <key>match</key>
+                <string>^\s*([!a-zA-Z0-9_|&.()]+)::</string>
+                <key>captures</key>
+                <dict>
+                    <key>1</key>
+                    <dict>
+                        <key>name</key>
+                        <string>entity.other.inherited-class.name.cfengine</string>
+                    </dict>
+                </dict>
+            </dict>
+            
+            <dict>
+                <key>match</key>
+                <string>([!])[!a-zA-Z0-9_|&.()]+::</string>
+                <key>captures</key>
+                <dict>
+                    <key>1</key>
+                    <dict>
+                        <key>name</key>
+                        <string>punctuation.class.negate.cfengine</string>
+                    </dict>
+                </dict>
+            </dict>
+
+
             <!-- classes 
             <dict>
                 <key>begin</key>
@@ -162,7 +189,7 @@
                     </dict>
                 </array>
             </dict>
-            -->
+-->
 
             <!-- Comments -->
             <dict>
