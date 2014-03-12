@@ -1,0 +1,10 @@
+<snippet>
+    <tabTrigger>bodyfc</tabTrigger>
+    <scope>source.cfengine</scope>
+    <description>Body file control</description>
+    <content><![CDATA[
+body file control
+{
+    namespace	=> "${1:namespace}";
+}]]></content>
+</snippet>

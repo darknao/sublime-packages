@@ -125,9 +125,24 @@
                 <string>meta.promise.cfengine</string>
             </dict>
 
+            <!-- namespace -->
             <dict>
                 <key>match</key>
-                <string>^\s*([!a-zA-Z0-9_|&.()]+)::</string>
+                <string>([a-zA-Z0-9_]+):(?=[!a-zA-Z]+)</string>
+                <key>captures</key>
+                <dict>
+                    <key>1</key>
+                    <dict>
+                        <key>name</key>
+                        <string>entity.name.tag.namespace.cfengine</string>
+                    </dict>
+                </dict>
+            </dict>
+            
+            <!-- classes definition -->
+            <dict>
+                <key>match</key>
+                <string>^\s*([!a-zA-Z0-9_|&.():]+)::</string>
                 <key>captures</key>
                 <dict>
                     <key>1</key>
@@ -138,17 +153,45 @@
                 </dict>
             </dict>
             
+            <!-- function call -->
             <dict>
-                <key>match</key>
-                <string>([!])[!a-zA-Z0-9_|&.()]+::</string>
+                <key>begin</key>
+                <string>[:\s]?([a-zA-Z_][a-zA-Z0-9_]*)\(</string>
+                <key>beginCaptures</key>
+                <dict>
+                    <key>1</key>
+                    <dict>
+                        <key>name</key>
+                        <string>support.function.cfengine</string>
+                    </dict>
+                </dict>
+
+                <key>end</key>
+                <string>\)\s*(;|,)</string>
+
+                <key>patterns</key>
+                <array>
+                    <dict>
+                        <key>include</key>
+                        <string>#string_quoted_double</string>
+                    </dict>
+                    <dict>
+                        <key>include</key>
+                        <string>#function_arguments</string>
+                    </dict>
+                </array>
+
+                <!-- 
+                <string>[:\s]?([a-zA-Z_][a-zA-Z0-9_]*)\(.*\)\s*(;|,)</string>
                 <key>captures</key>
                 <dict>
                     <key>1</key>
                     <dict>
                         <key>name</key>
-                        <string>punctuation.class.negate.cfengine</string>
+                        <string>support.function.cfengine</string>
                     </dict>
                 </dict>
+                -->
             </dict>
 
 
@@ -190,6 +233,10 @@
                 </array>
             </dict>
 -->
+            <dict>
+                <key>include</key>
+                <string>#promise_attributes</string>
+            </dict>
 
             <!-- Comments -->
             <dict>
@@ -414,6 +461,52 @@
                 <string>\b(files|packages|guest_environments|methods|processes|services|commands|storage|databases)\b</string>
                 <key>name</key>
                 <string>support.promise.type.agent.cfengine</string>
+            </dict>
+
+            <key>function_arguments</key>
+            <dict>
+                <key>match</key>
+                <string>([a-zA-Z_0-9]+)\s*(?:(,)|(?=\)))</string>
+                <key>captures</key>
+                <dict>
+                    <key>1</key>
+                    <dict>
+                        <key>name</key>
+                        <string>variable.parameter.function.cfengine</string>
+                    </dict>
+                    <key>2</key>
+                    <dict>
+                        <key>name</key>
+                        <string>punctuation.separator.parameters.cfengine</string>
+                    </dict>
+                </dict>
+            </dict>
+
+            <key>promise_attributes</key>
+            <dict>
+                <key>match</key>
+                <string>(?x)\b(
+                    create|perms|copy_from|file_select|depth_search|delete|comment|classes|contain|handle|edit_line|edit_field|insert_type|expand_scalars|
+                    replace_with|ifvarclass|
+                    slist|string|
+                    usebundle|
+                    expression|
+                    namespace|
+                    source|servers|compare|encrypt|verify|copy_backup|purge|preserve|type_check|
+                    )\s*(\=\>)</string>
+                <key>captures</key>
+                <dict>
+                    <key>1</key>
+                    <dict>
+                        <key>name</key>
+                        <string>entity.name.promise_type.cfengine</string>
+                    </dict>
+                    <key>2</key>
+                    <dict>
+                        <key>name</key>
+                        <string>keyword.operator.assignment.cfengine</string>
+                    </dict>
+                </dict>
             </dict>
 
         </dict>

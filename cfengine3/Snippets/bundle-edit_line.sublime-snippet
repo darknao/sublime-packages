@@ -1,0 +1,33 @@
+<snippet>
+	<content><![CDATA[
+bundle edit_line ${1:bundlename}
+    {
+        vars:
+            ${2:}
+
+        classes:
+            ${3:}
+
+        insert_lines:
+        	${4:}
+
+		delete_lines:
+			${5:}
+
+		field_edits:
+			${6:}
+
+		replace_patterns:
+			${7:}
+
+        reports:
+            ${8:}
+
+        meta:
+            ${9:}
+
+}]]></content>
+	<tabTrigger>bundlel</tabTrigger>
+	<scope>source.cfengine</scope>
+	<description>Bundle edit line</description>
+</snippet>

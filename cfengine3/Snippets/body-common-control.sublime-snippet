@@ -1,0 +1,13 @@
+<snippet>
+    <tabTrigger>bodycc</tabTrigger>
+    <scope>source.cfengine</scope>
+    <description>Body common control</description>
+    <content><![CDATA[
+body common ${1:control}
+{
+    inputs => { ${2:\$(sys.workdir)} };
+    bundlesequence => { ${3:} };
+	output_prefix => "${4:cfengine>}";
+    version => "${5:1.0.0}";
+}]]></content>
+</snippet>
